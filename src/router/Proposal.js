@@ -84,4 +84,21 @@ router.delete("/remove/:id", async (req, res) => {
   }
 });
 
+router.put("/update/:id", async (req, res) => {
+  try {
+    const updateProposal = await Proposal.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    if (updateProposal) {
+      return res.status(201).json(updateProposal);
+    }
+  } catch (err) {
+    res.status(401).json(err);
+  }
+});
+
 module.exports = router;
