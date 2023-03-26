@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const User = require('./../model/UserSchema')
-const Proposal = require('./../model/VendorSchema')
+const Vendor = require('./../model/VendorSchema')
 
 const authenticate = async(req,res,next)=>{
     try{
@@ -11,7 +11,7 @@ const authenticate = async(req,res,next)=>{
         }
         const data = req.query.data
 
-        let coll = data == "user" ? User : Proposal
+        let coll = data == "user" ? User : Vendor
         
         const verifyToken = jwt.verify(token,process.env.JWT_SEC)
 
