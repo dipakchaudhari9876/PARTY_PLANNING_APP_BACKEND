@@ -20,7 +20,7 @@ const proposalSchema = new mongoose.Schema(
       required: true,
     },
     budget: {
-      type: Number,
+      type: String,
       required: true,
     },
     startDate: {

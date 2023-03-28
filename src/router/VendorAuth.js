@@ -28,10 +28,10 @@ router.post('/register', async (req, res) => {
 
         const saveData = await upload.save()
         if (saveData) {
-            return res.status(201).send(saveData)
+            return res.status(201).json({message:"Registered successfully"})
         }
     } catch (err) {
-        return res.status(401).send({ error: "Invalid Credentials" })
+        return res.status(401).json({ error: "Invalid Credentials" })
     }
 })
 
@@ -39,9 +39,9 @@ router.post('/login', async (req, res) => {
     const { data, password } = req.body
     let email = ""
     let phone = ""
-    if ((pattern.email).test(data)) {
+    if ((/^[a-z0-9\.]{1,}@[a-z]{1,}\.com$/g).test(data)) {
         email = data
-    } else if ((pattern.phone).test(data)) {
+    } else if (/^[0-9]{10}$/.test(data)) {
         phone = data
     } else {
         return res.status(401).json({ error: "Invalid credentials" })
@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
             //     withCredentials: true
             // })
             const {password,Cpassword,...data} = Check._doc 
-            return res.status(201).send({...data,token:accessToken})
+            return res.status(201).json({...data,token:accessToken})
         }else{
             return res.status(401).json({error:"password/userId is incorrect"})
         }   

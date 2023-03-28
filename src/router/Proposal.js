@@ -57,7 +57,7 @@ router.get("/event/:id", async (req, res) => {
   }
 });
 
-router.get("/findall/:id", async (req, res) => {
+router.get("/findall/:id",authenticate, async (req, res) => {
   const id = req.params.id;
   try {
     const proposals = await Proposal.find({ vendorId: id });
