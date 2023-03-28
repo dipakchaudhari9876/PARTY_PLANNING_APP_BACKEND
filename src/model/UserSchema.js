@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectId } = mongoose.Schema.Types;
 
 const UserSchema = new mongoose.Schema({
     name:{
@@ -20,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     Cpassword:{
         type:String,
         required:true
+    },
+    selectedProposal:{
+        type:ObjectId,
+        ref:"Proposal"
     }
 },{timestamps:true})
 

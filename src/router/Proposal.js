@@ -57,7 +57,7 @@ router.get("/event/:id", async (req, res) => {
   }
 });
 
-router.get("/findall/:id", authenticate, async (req, res) => {
+router.get("/findall/:id",authenticate, async (req, res) => {
   const id = req.params.id;
   try {
     const proposals = await Proposal.find({ vendorId: id });
@@ -67,7 +67,7 @@ router.get("/findall/:id", authenticate, async (req, res) => {
   } catch (err) {
     //type of error to be decided later
 
-    console.log(err);
+      return res.status(201).send({error:"Vendor not verified"});
   }
 });
 

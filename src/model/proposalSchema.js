@@ -20,7 +20,7 @@ const proposalSchema = new mongoose.Schema(
       required: true,
     },
     budget: {
-      type: Number,
+      type: String,
       required: true,
     },
     startDate: {
@@ -53,8 +53,8 @@ const proposalSchema = new mongoose.Schema(
     },
     vendorId: {
       type: ObjectId,
-      ref: "Vendor",
-    },
+      ref: "Vendor"
+    }
   },
   { timestamps: true }
 );
