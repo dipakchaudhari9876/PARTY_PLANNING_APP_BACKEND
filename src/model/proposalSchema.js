@@ -53,8 +53,8 @@ const proposalSchema = new mongoose.Schema(
     },
     vendorId: {
       type: ObjectId,
-      ref: "Vendor",
-    },
+      ref: "Vendor"
+    }
   },
   { timestamps: true }
 );

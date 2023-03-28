@@ -57,19 +57,33 @@ router.post('/login', async (req, res) => {
                 id: Check._id
             },process.env.JWT_SEC,{expiresIn:"1d"})
 
-            res.cookie("jwtoken",accessToken,{
-                expires:new Date(Date.now() + 86400 ),
-                httpOnly:true,
-                withCredentials: true
-            })
+            // res.cookie("jwtoken",accessToken,{
+            //     expires:new Date(Date.now() + 86400 ),
+            //     httpOnly:true,
+            //     withCredentials: true
+            // })
             const {password,Cpassword,...data} = Check._doc 
-            return res.status(201).send({data,token:accessToken})
+            return res.status(201).send({...data,token:accessToken})
         }else{
             return res.status(401).json({error:"password/userId is incorrect"})
         }   
     } catch (err) {
         return res.status(401).json({error:"Invalid credentials "})
     }
+})
+
+router.get('/getdetail/:id',async(req,res)=>{
+    const id = req.params.id
+    try {
+        const vendorData = await Vendor.findOne({ _id: id });
+        if (vendorData) {
+            const {password,Cpassword,...data} = vendorData._doc
+          return res.status(201).send({...data});
+        }
+      } catch (err) {
+        //type of error to be decided later
+        console.log(err);
+      }
 })
 
 module.exports = router

@@ -6,6 +6,7 @@ const Vendor = require('./../model/VendorSchema')
 const authenticate = async(req,res,next)=>{
     try{
         const token = req.query.jwtoken
+        // console.log(token)
         if(!token){
             return res.status(400).json({error:"User not verified"})
         }
@@ -14,6 +15,7 @@ const authenticate = async(req,res,next)=>{
         let coll = data == "user" ? User : Vendor
         
         const verifyToken = jwt.verify(token,process.env.JWT_SEC)
+        // console.log(verifyToken)
 
         const user = await coll.find({_id:verifyToken.id})
 
