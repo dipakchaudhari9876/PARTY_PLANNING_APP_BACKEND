@@ -23,8 +23,8 @@ const UserSchema = new mongoose.Schema({
         required:true
     },
     selectedProposal:{
-        type:ObjectId,
-        ref:"Proposal"
+        type:String,
+        default:""
     }
 },{timestamps:true})
 

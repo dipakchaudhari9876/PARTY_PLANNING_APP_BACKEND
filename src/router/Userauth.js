@@ -9,9 +9,7 @@ const authenticate = require('../middleware/authenticate')
 
 router.post('/register', async (req, res) => {
     const { name, email, phone, password, Cpassword } = req.body
-    if (!name || !email || !phone || !password || !Cpassword) {
-        return res.status(401).json({ error: "Please fill all data" })
-    }
+    
     try {
         const validateEmail = await User.findOne({ email })
         if (validateEmail) {
@@ -25,7 +23,7 @@ router.post('/register', async (req, res) => {
 
         const saveData = await upload.save()
         if (saveData) {
-            return res.status(201).send(saveData)
+            return res.status(201).json({message:"User register successfull"})
         }
 
 
@@ -45,7 +43,7 @@ router.post('/login', async (req, res) => {
         } else if ((/^[0-9]{10}$/).test(data)) {
             phone = data
         } else {
-            return res.status(400).json({ error: "Invalid credentials why" })
+            return res.status(400).json({ error: "Invalid credentials" })
         }
         const Check = await User.findOne(email ? { email } : { phone })
         if (!Check) {
@@ -107,7 +105,7 @@ router.put("/selectproposal/:id", async (req, res) => {
         { new: true }
       );
       if (updateUser) {
-        return res.status(201).json(updateUser);
+        return res.status(201).json({message:"Success"});
       }
     } catch (err) {
       res.status(401).json(err);
